@@ -6,10 +6,10 @@ class SmartIoC::Scopes::Singleton
     @beans = {}
   end
 
-  # @param klass [Class] bean class
+  # @param bean_name [Class] bean class
   # @returns bean instance or nil if not stored
-  def get_bean(klass)
-    @beans[klass]
+  def get_bean(bean_name:)
+    @beans[bean_name]
   end
 
   # @param klass [Class] bean class
