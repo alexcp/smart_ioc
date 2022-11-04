@@ -24,13 +24,13 @@ describe SmartIoC::BeanFileLoader do
       load(location)
     end
 
-    @container.get_bean(:users_creator)
+    @container.get_bean(bean_name: :users_creator)
     expect($location_loaded).to eq(true)
   end
 
   it 'requires beans only once' do
-    repository = @container.get_bean(:repository, package: :admins, context: :test)
-    repository = @container.get_bean(:repository, package: :admins, context: :test)
+    repository = @container.get_bean(bean_name: :repository, package: :admins, context: :test)
+    repository = @container.get_bean(bean_name: :repository, package: :admins, context: :test)
     expect(repository.get(1)).to eq(nil)
   end
 end

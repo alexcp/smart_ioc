@@ -117,9 +117,9 @@ module SmartIoC
     # @param optional parent_bean_definition [SmartIoc::BeanDefinition] bean definition of parent bean
     # @param optional context [Symbol] package context
     # @return bean instance from container
-    def get_bean(bean_name, package: nil, context: nil, parent_bean_definition: nil)
+    def get_bean(bean_name:, package: nil, context: nil, parent_bean_definition: nil)
       bean_factory.get_bean(
-        bean_name,
+        bean_name: bean_name,
         package: package,
         parent_bean_definition: parent_bean_definition,
         context: context,

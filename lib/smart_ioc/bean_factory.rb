@@ -31,7 +31,7 @@ class SmartIoC::BeanFactory
   # @return bean instance
   # @raise [ArgumentError] if bean is not found
   # @raise [ArgumentError] if ambiguous bean definition was found
-  def get_bean(bean_name, package: nil, parent_bean_definition: nil, context: nil)
+  def get_bean(bean_name:, package: nil, parent_bean_definition: nil, context: nil)
     check_arg(bean_name, :bean_name, Symbol)
     check_arg(package, :package, Symbol) if package
     check_arg(parent_bean_definition, :parent_bean_definition, SmartIoC::BeanDefinition) if parent_bean_definition
@@ -43,7 +43,7 @@ class SmartIoC::BeanFactory
     context = autodetect_context(bean_name, package, parent_package_name, context)
     bean_definition = @bean_definitions_storage.find(bean_name, package, context, parent_package_name)
     scope = get_scope(bean_definition)
-    bean = scope.get_bean(bean_definition.klass)
+    bean = scope.get_bean(bean_name: bean_definition.klass)
 
     if !bean
       bean = init_bean(bean_definition)

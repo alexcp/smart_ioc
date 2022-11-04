@@ -36,37 +36,37 @@ describe SmartIoC::BeanFactory do
     SmartIoC.benchmark_mode(true)
 
     SmartIoC.set_extra_context_for_package(:bean_factory, :test)
-    SmartIoC.get_bean(:repo)
+    SmartIoC.get_bean(bean_name: :repo)
 
     SmartIoC.benchmark_mode(false)
   end
 
   it 'returns same instance for singleton scope' do
     SmartIoC.set_extra_context_for_package(:bean_factory, :test)
-    instance1 = SmartIoC.get_bean(:repo)
-    instance2 = SmartIoC.get_bean(:repo)
+    instance1 = SmartIoC.get_bean(bean_name: :repo)
+    instance2 = SmartIoC.get_bean(bean_name: :repo)
     expect(instance1.object_id).to eq(instance2.object_id)
   end
 
   it 'returns same instance for factory method and singleton scope' do
-    instance1_object_id = SmartIoC.get_bean(:factory).object_id
-    instance2_object_id = SmartIoC.get_bean(:factory).object_id
+    instance1_object_id = SmartIoC.get_bean(bean_name: :factory).object_id
+    instance2_object_id = SmartIoC.get_bean(bean_name: :factory).object_id
     expect(instance1_object_id).to eq(instance2_object_id)
   end
 
   it 'returns proper bean for test context' do
     SmartIoC.set_extra_context_for_package(:bean_factory, :test)
-    expect(SmartIoC.get_bean(:repo)).to be_a(TestRepo)
+    expect(SmartIoC.get_bean(bean_name: :repo)).to be_a(TestRepo)
   end
 
   it 'returns proper bean for default context' do
     SmartIoC.set_extra_context_for_package(:bean_factory, :default)
-    expect(SmartIoC.get_bean(:repo)).to be_a(Repo)
+    expect(SmartIoC.get_bean(bean_name: :repo)).to be_a(Repo)
   end
 
   it 'returns proper bean for test context with fallback to default context' do
     SmartIoC.set_extra_context_for_package(:bean_factory, :test)
-    expect(SmartIoC.get_bean(:dao)).to be_a(DAO)
+    expect(SmartIoC.get_bean(bean_name: :dao)).to be_a(DAO)
   end
 
   it 'updates dependencies' do
@@ -93,12 +93,12 @@ describe SmartIoC::BeanFactory do
       public :second_singleton_bean
     end
 
-    bean1 = SmartIoC.get_bean(:singleton_bean, package: :test)
+    bean1 = SmartIoC.get_bean(bean_name: :singleton_bean, package: :test)
     bean1_object_id = bean1.object_id
     prototype_bean1_object_id = bean1.prototype_bean.object_id
     second_singleton_bean1_object_id = bean1.prototype_bean.second_singleton_bean.object_id
 
-    bean2 = SmartIoC.get_bean(:singleton_bean, package: :test)
+    bean2 = SmartIoC.get_bean(bean_name: :singleton_bean, package: :test)
     bean2_object_id = bean2.object_id
     prototype_bean2_object_id = bean2.prototype_bean.object_id
     second_singleton_bean2_object_id = bean2.prototype_bean.second_singleton_bean.object_id
@@ -154,7 +154,7 @@ describe SmartIoC::BeanFactory do
     end
 
     it 'injects prototype beans with different object id' do
-      prototype_bean = SmartIoC.get_bean(:prototype_bean)
+      prototype_bean = SmartIoC.get_bean(bean_name: :prototype_bean)
       repo1_object_id = prototype_bean.prototype_service1.prototype_repo.object_id
       repo2_object_id = prototype_bean.prototype_service2.prototype_repo.object_id
 
@@ -162,7 +162,7 @@ describe SmartIoC::BeanFactory do
     end
 
     it 'injects singleton beans with same object id' do
-      prototype_bean = SmartIoC.get_bean(:prototype_bean)
+      prototype_bean = SmartIoC.get_bean(bean_name: :prototype_bean)
       repo1_object_id = prototype_bean.prototype_service1.singleton_repo.object_id
       repo2_object_id = prototype_bean.prototype_service2.singleton_repo.object_id
 

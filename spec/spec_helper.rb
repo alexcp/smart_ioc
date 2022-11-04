@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'simplecov'
+require 'byebug'
 
 SimpleCov.start do
   add_filter "/spec/"

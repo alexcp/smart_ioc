@@ -5,7 +5,7 @@ class SmartIoC::Scopes::Prototype
   # Get new bean instance
   # @param bean_definition [BeanDefinition] bean definition
   # @returns nil
-  def get_bean(bean_definition)
+  def get_bean(bean_name:)
     # do nothing
   end
 

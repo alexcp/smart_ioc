@@ -21,10 +21,10 @@ describe SmartIoC do
   end
 
   it 'sets beans' do
-    users_creator = @container.get_bean(:users_creator)
+    users_creator = @container.get_bean(bean_name: :users_creator)
     users_creator.create(1, 'test@test.com')
 
-    repository = @container.get_bean(:repository, package: :admins)
+    repository = @container.get_bean(bean_name: :repository, package: :admins)
 
     expect(repository.get(1)).to be_a(User)
     expect(users_creator.send(:repository)).to be_a(AdminsRepository)
@@ -35,10 +35,10 @@ describe SmartIoC do
     SmartIoC.set_extra_context_for_package(:admins, :test)
     SmartIoC.force_clear_scopes
     
-    users_creator = @container.get_bean(:users_creator)
+    users_creator = @container.get_bean(bean_name: :users_creator)
     users_creator.create(1, 'test@test.com')
 
-    repository = @container.get_bean(:repository, package: :admins)
+    repository = @container.get_bean(bean_name: :repository, package: :admins)
 
     expect(users_creator.send(:repository)).to eq(TestAdminsRepository)
     expect(repository.get(1)).to be_a(User)

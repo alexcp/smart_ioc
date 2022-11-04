@@ -40,7 +40,7 @@ SmartIoC::Container.get_instance.set_extra_context_for_package(:YOUR_PACKAGE_NAM
 
 This allows to create test implementations for any package dependency.
 
-4. In order to get a bean use `SmartIoC::Container.get_bean(:BEAN_NAME, package: :PACKAGE_NAME, context: :default)`. `package` and `context` are optional arguments.
+4. In order to get a bean use `SmartIoC::Container.get_bean(bean_name: :BEAN_NAME, package: :PACKAGE_NAME, context: :default)`. `package` and `context` are optional arguments.
 
 5. If you use the same bean name for different dependencies in different packages you will need to specify the  package directly. You can do that by using `from` parameter:
 

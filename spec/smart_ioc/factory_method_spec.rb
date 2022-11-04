@@ -36,8 +36,8 @@ describe 'Factory Method' do
       end
     end
 
-    @test_service = SmartIoC.get_bean(:test_service)
-    @other_service = SmartIoC.get_bean(:other_service)
+    @test_service = SmartIoC.get_bean(bean_name: :test_service)
+    @other_service = SmartIoC.get_bean(bean_name: :other_service)
   end
 
   it 'assigns bean with factory method' do
@@ -107,14 +107,14 @@ describe 'Factory Method' do
     end
 
     it 'creates factory_logger bean' do
-      logger = SmartIoC.get_bean(:factory_logger, package: :cross_refference)
+      logger = SmartIoC.get_bean(bean_name: :factory_logger, package: :cross_refference)
       expect(logger).to be_a(FactoryLogger::Logger)
       expect(logger.factory_config).to be_a(FactoryConfig::Config)
       expect(logger.factory_config.singleton_bean).to be_a(SingletonBean)
     end
 
     it 'creates factory_config bean' do
-      config = SmartIoC.get_bean(:factory_config, package: :cross_refference)
+      config = SmartIoC.get_bean(bean_name: :factory_config, package: :cross_refference)
       expect(config).to be_a(FactoryConfig::Config)
       expect(config.singleton_bean).to be_a(SingletonBean)
     end

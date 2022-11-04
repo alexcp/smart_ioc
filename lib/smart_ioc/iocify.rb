@@ -16,7 +16,7 @@
 #   end
 # end
 #
-# SmartIoC::Container.get_bean(:bar).hello_world
+# SmartIoC::Container.get_bean(bean_name: :bar).hello_world
 module SmartIoC::Iocify
   def self.included base
     base.extend ClassMethods
@@ -100,7 +100,7 @@ module SmartIoC::Iocify
         bean_definition = SmartIoC::Container.get_instance.get_bean_definition_by_class(klass)
 
         bean = SmartIoC::Container.get_instance.get_bean(
-          ref || bean_name,
+          bean_name: (ref || bean_name),
           package: from,
           parent_bean_definition: bean_definition
         )
